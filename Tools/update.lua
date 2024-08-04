@@ -1,6 +1,9 @@
 repo = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/_Files.txt"
 path = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/"
 
+term.clear()
+term.setCursorPos()
+
 function download(name, url)
   request = http.get(url)
 
@@ -23,7 +26,6 @@ function download(name, url)
   end
 
 end
-
 -- Start by downloading the repo file
 download("_Files.txt", repo)
 
@@ -36,12 +38,4 @@ for i, v in pairs(fileList) do
   print("Downloading " .. v)
   download(i, path..v)
 end
-
-print("Update complete")
-print("Updated: " .. #fileList .. " files")
-
-term.clear()
-term.setCursorPos()
-
-
 
