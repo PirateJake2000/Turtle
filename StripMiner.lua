@@ -72,7 +72,10 @@ local currentRow = 1
 --------------------
 :: mine ::
 --------------------
-for i=1,rowLength do
+local rowEndPos = slave.position + slave.facing * rowLength
+
+-- while not at end of row mine
+while slave.position ~= rowEndPos do
     local blocks = mine()
 end
 
