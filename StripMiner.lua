@@ -55,7 +55,7 @@ end
 -- Settings
 local startPos = slave.position
 local startFacing = slave.facing
-local mineDepth = 25
+local mineDepth = 30
 
 local rows = 4
 local rowLength = 16
@@ -68,7 +68,7 @@ end
 
 print("Reached Mine Depth")
 
-local currentRow = 1
+local currentRow = 0
 --------------------
 :: mine ::
 --------------------
@@ -104,5 +104,6 @@ currentRow = currentRow + 1
 if (currentRow <= rows) then goto mine else
     print("Returning to home")
     slave:goToDestructive(startPos)
+    slave:headingCommand(startFacing)
 end
 --------------------
