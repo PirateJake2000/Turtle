@@ -31,9 +31,13 @@ local data = file.readAll()
 local files = textutils.unserialize(data)
 file.close()
 
--- Download each file
+-- Delete the repo file
+fs.delete("_Files.lua")`
+
+-- print list of files
+print("Files to download:")
 for i, file in ipairs(files) do
-  download(file, "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/" .. file .. ".lua")
+  print(file)
 end
 
 term.clear()
