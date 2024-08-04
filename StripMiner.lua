@@ -5,27 +5,20 @@ ins = require("Library.ins")
 -- Setup
 local slave = ins(vector(-261,78,-70), vector(0,0,-1))
 
-print(slave.position)
-
--- Main
--- Turtle --
--- dig forward
--- move forward
--- check up
--- check down
--- turn left
--- check forward
--- turn right
--- turn right
--- check forward
--- turn left
-
--- if any check is ore then mineVein()
--- then return to tunnel
+-- Ores
+local oreDict = {
+    "minecraft:coal_ore",
+    "minecraft:iron_ore",
+    "minecraft:gold_ore",
+    "minecraft:redstone_ore",
+    "minecraft:lapis_ore",
+    "minecraft:diamond_ore",
+    "minecraft:emerald_ore",
+}
 
 
 -- Functions
-function mineVein()
+function mineVein(oreVector)
 
 end
 
@@ -34,15 +27,23 @@ function mine()
     slave:forward()
 
     local blockUp = turtle.inspectUp()
+    blockUp.position = slave.position + vector(0,1,0)
+
     local blockDown = turtle.inspectDown()
+    blockDown.position = slave.position + vector(0,-1,0)
     
     slave:turnLeft()
     local blockLeft = turtle.inspect()
+    blockLeft.position = slave.position + slave.facing
+
     slave:turnRight()
 
     slave:turnRight()
     local blockRight = turtle.inspect()
+    blockRight.position = slave.position + slave.facing
+
     slave:turnLeft()
+
 
     return {
         up = blockUp,
@@ -68,17 +69,13 @@ end
 
 print("Reached Mine Depth")
 
+
+
+
 local currentRow = 0
 --------------------
 :: mine ::
 --------------------
-local rowEndPos = slave.position + slave.facing * rowLength
-
--- while not at end of row mine
-while slave.position ~= rowEndPos do
-    local blocks = mine()
-end
-
 if slave.facing == startFacing then
     slave:turnRight()
     turtle.dig()
@@ -97,6 +94,21 @@ else
     turtle.dig()
     slave:forward()
     slave:turnLeft()
+end
+
+local rowEndPos = slave.position + slave.facing * rowLength
+
+-- while not at end of row mine
+while slave.position ~= rowEndPos do
+    local blocks = mine()
+
+    for key, value in pairs(blocks) do
+        if value.name in oreDict then
+            mineVein(value.position)
+            print("Found Ore: " .. value.name)
+            print("Position: " .. value.position)
+        end
+    end
 end
 
 currentRow = currentRow + 1
