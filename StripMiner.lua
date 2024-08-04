@@ -29,13 +29,36 @@ function mineVein()
 
 end
 
+function mine()
+    turtle.dig()
+    slave:forward()
+
+    local blockUp = turtle.inspectUp()
+    local blockDown = turtle.inspectDown()
+    
+    slave:turnLeft()
+    local blockLeft = turtle.inspect()
+    slave:turnRight()
+
+    slave:turnRight()
+    local blockRight = turtle.inspect()
+    slave:turnLeft()
+
+    return {
+        up = blockUp,
+        down = blockDown,
+        left = blockLeft,
+        right = blockRight
+    }
+end
+
 -- Settings
 local startPos = slave.position
 local startFacing = slave.facing
-local mineDepth = 50
+local mineDepth = 25
 
-local rows = 8
-local rowLength = 32
+local rows = 4
+local rowLength = 16
 
 -- go down to mineDepth
 while slave.position.y > mineDepth do
@@ -50,14 +73,13 @@ local currentRow = 1
 :: mine ::
 --------------------
 for i=1,rowLength do
-    turtle.dig()
-    slave:forward()
-
-    -- Check around for ores
+    local blocks = mine()
 end
 
 if slave.facing == startFacing then
     slave:turnRight()
+    turtle.dig()
+    slave:forward()
     turtle.dig()
     slave:forward()
     turtle.dig()
@@ -74,6 +96,8 @@ end
 
 currentRow = currentRow + 1
 --------------------
-if (currentRow < rows) then goto mine else return end
+if (currentRow < rows) then goto mine else
+    print("Returning to home")
+    slave:goToDestructive(startPos)
+end
 --------------------
-slave:goToDestructive(startPos)
