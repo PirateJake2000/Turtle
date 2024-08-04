@@ -2,9 +2,13 @@ repo = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/_Files.txt"
 path = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/"
 
 function download(name, url)
-  print("Updating " .. name)
- 
   request = http.get(url)
+
+  if request == nil then
+    print("Failed to download: " .. name)
+    return
+  end
+
   data = request.readAll()
  
   if fs.exists(name) then
@@ -17,8 +21,7 @@ function download(name, url)
     file.write(data)
     file.close()
   end
- 
-  print("Successfully downloaded " .. name .. "\n")
+
 end
 
 -- Start by downloading the repo file
