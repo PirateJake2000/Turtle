@@ -1,6 +1,3 @@
--- Update script
--- Automatically downloads ComputerCraft programs to a computer
-
 urls = {
     {"Button",         "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/Button.lua"},
     {"MiningTurtle",   "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/MiningTurtle.lua"},
@@ -34,4 +31,3 @@ for key, value in ipairs(urls) do
 end
 
 term.clear()
-term.setCursorPos()
