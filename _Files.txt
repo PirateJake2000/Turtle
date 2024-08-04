@@ -1,6 +1,6 @@
 {
-    "Library/vector",
-    "Library/ins",
-    "Main",
-    "Miner"
+    "Library/vector.lua",
+    "Library/ins.lua",
+    "Main.lua",
+    "Miner.lua"
 }
