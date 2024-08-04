@@ -24,7 +24,7 @@ end
 download("_Files.lua", repo)
 
 -- Read the repo file for a list of files to download
-local file = fs.open("_Files.lua", "r")
+local file = fs.open("_Files.txt", "r")
 local data = file.readAll()
 
 -- Load the file into a table
@@ -32,7 +32,7 @@ local files = textutils.unserialize(data)
 file.close()
 
 -- Delete the repo file
-fs.delete("_Files.lua")`
+fs.delete("_Files.txt")
 
 -- print list of files
 print("Files to download:")
