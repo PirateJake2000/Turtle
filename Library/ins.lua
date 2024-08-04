@@ -281,12 +281,12 @@ local ins = {
                 self:forward()
             end
 
-            while self:position.y < target.y do
+            while self.position.y < target.y do
                 turtle.digUp()
                 self:up()
             end
 
-            while self:position.y > target.y do
+            while self.position.y > target.y do
                 turtle.digDown()
                 self:down()
             end
