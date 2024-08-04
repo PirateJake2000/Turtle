@@ -5,6 +5,8 @@ ins = require("Library.ins")
 -- Setup
 local slave = ins(vector(-261,78,-70), vector(0,0,-1))
 
+print(slave.position)
+
 -- Main
 -- Turtle --
 -- dig forward
@@ -41,10 +43,12 @@ while slave.position.y > mineDepth do
     slave:down()
 end
 
+print("Reached Mine Depth")
 
 local currentRow = 1
 --------------------
 :: mine ::
+goto mine
 --------------------
 for i=1,rowLength do
     turtle.dig()
