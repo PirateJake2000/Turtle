@@ -2,5 +2,6 @@
     "Library/vector.lua",
     "Library/ins.lua",
     "Main.lua",
-    "Miner.lua"
+    "Miner.lua",
+    "StripMiner.lua"
 }
