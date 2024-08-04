@@ -48,7 +48,6 @@ print("Reached Mine Depth")
 local currentRow = 1
 --------------------
 :: mine ::
-goto mine
 --------------------
 for i=1,rowLength do
     turtle.dig()
@@ -77,3 +76,4 @@ currentRow = currentRow + 1
 --------------------
 if (currentRow < rows) then goto mine else return end
 --------------------
+slave:goToDestructive(startPos)

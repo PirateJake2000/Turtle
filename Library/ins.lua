@@ -253,7 +253,45 @@ local ins = {
                 self:forward()
             end
             
-        end
+        end,
+
+        -- goes to a block destructively
+        goToDestructive = function(self, target)
+            local tempTarget = vector(target.x, self.position.y, self.position.z)
+            self:lookAt(tempTarget)
+
+            -- move to target
+            local steps = self.position:distance(tempTarget)
+
+            print(steps)
+
+            for i=1, steps do
+                turtle.dig()
+                self:forward()
+            end
+
+            tempTarget = vector(self.position.x, self.position.y, target.z)
+
+            self:lookAt(tempTarget)
+
+            steps = self.position:distance(tempTarget)
+
+            for i=1, steps do
+                turtle.dig()
+                self:forward()
+            end
+
+            while self:position.y < target.y do
+                turtle.digUp()
+                self:up()
+            end
+
+            while self:position.y > target.y do
+                turtle.digDown()
+                self:down()
+            end
+            
+        end,
     }
 }
 
