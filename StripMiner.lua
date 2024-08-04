@@ -36,7 +36,7 @@ local rows = 8
 local rowLength = 32
 
 -- go down to mineDepth
-while slave.position.z > mineDepth do
+while slave.position.y > mineDepth do
     turtle.digDown()
     slave:down()
 end
