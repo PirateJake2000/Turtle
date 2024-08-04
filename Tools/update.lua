@@ -1,4 +1,5 @@
 repo = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/_Files.txt"
+path = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/"
 
 function download(name, url)
   print("Updating " .. name)
@@ -25,20 +26,19 @@ download("_Files.txt", repo)
 
 -- Read the repo file for a list of files to download
 local file = fs.open("_Files.txt", "r")
-local data = file.readAll()
-
--- Load the file into a table
-local files = textutils.unserialize(data)
+local fileList = textutils.unserialize(file.readAll())
 file.close()
 
--- Delete the repo file
-fs.delete("_Files.txt")
-
--- print list of files
-print("Files to download:")
-for i, file in ipairs(files) do
-  print(file)
+for i, v in pairs(fileList) do
+  print("Downloading " .. v)
+  download(i, path..v)
 end
+
+print("Update complete")
+print("Updated: " .. #fileList .. " files")
 
 term.clear()
 term.setCursorPos()
+
+
+

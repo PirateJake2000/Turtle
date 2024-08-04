@@ -20,8 +20,6 @@ local ins = {
                 facing = self.facing,
                 facingRight = self.facingRight
             }))
-
-            os.setComputerLabel("INS " .. self.position)
         
             saveFile.close()
         end,
