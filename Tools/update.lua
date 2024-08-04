@@ -1,4 +1,4 @@
-repo = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/_Files.lua"
+repo = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/_Files.txt"
 
 function download(name, url)
   print("Updating " .. name)
@@ -21,7 +21,7 @@ function download(name, url)
 end
 
 -- Start by downloading the repo file
-download("_Files.lua", repo)
+download("_Files.txt", repo)
 
 -- Read the repo file for a list of files to download
 local file = fs.open("_Files.txt", "r")
