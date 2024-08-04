@@ -1,11 +1,8 @@
-repo = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/_Files.txt"
+repo = "_Files.txt"
 path = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/"
 
-term.clear()
-term.setCursorPos()
-
-function download(name, url)
-  request = http.get(url)
+function download(name)
+  request = http.get(path..name)
 
   if request == nil then
     print("Failed to download: " .. name)
@@ -35,7 +32,13 @@ local fileList = textutils.unserialize(file.readAll())
 file.close()
 
 for i, v in pairs(fileList) do
-  print("Downloading " .. v)
-  download(i, path..v)
+  print("Downloading \n" ..path..v)
+  download(v)
 end
 
+-- Clean up
+fs.delete("_Files.txt")
+
+term.clear()
+term.setCursorPos(1,1)
+print("Updated Turtle")
