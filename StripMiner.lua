@@ -56,7 +56,7 @@ end
 -- Settings
 local startPos = slave.position
 local startFacing = slave.facing
-local mineDepth = 30
+local mineDepth = 10
 
 local rows = 4
 local rowLength = 16
