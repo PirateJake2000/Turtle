@@ -1,6 +1,6 @@
 local files = {
-    "vector",
-    "ins",
+    "Library/vector",
+    "Library/ins",
     "Main",
     "Miner"
 }

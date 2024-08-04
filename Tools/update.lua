@@ -1,10 +1,4 @@
-urls = {
-    {"Button",         "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/Button.lua"},
-    {"MiningTurtle",   "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/MiningTurtle.lua"},
-    {"EventListener",  "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/EventListener.lua"},
-    {"ReactorControl", "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/ReactorControl.lua"},
-    {"update",         "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/Update.lua"}
-}
+repo = "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/_Files.lua"
 
 function download(name, url)
   print("Updating " .. name)
@@ -26,8 +20,21 @@ function download(name, url)
   print("Successfully downloaded " .. name .. "\n")
 end
 
-for key, value in ipairs(urls) do
-    download(unpack(value))
+-- Start by downloading the repo file
+download("_Files.lua", repo)
+
+-- Read the repo file for a list of files to download
+local file = fs.open("_Files.lua", "r")
+local data = file.readAll()
+
+-- Load the file into a table
+local files = textutils.unserialize(data)
+file.close()
+
+-- Download each file
+for i, file in ipairs(files) do
+  download(file, "https://raw.githubusercontent.com/PirateJake2000/Turtle/main/" .. file .. ".lua")
 end
 
 term.clear()
+term.setCursorPos()
