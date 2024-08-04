@@ -94,12 +94,14 @@ else
     slave:forward()
     turtle.dig()
     slave:forward()
+    turtle.dig()
+    slave:forward()
     slave:turnLeft()
 end
 
 currentRow = currentRow + 1
 --------------------
-if (currentRow < rows) then goto mine else
+if (currentRow <= rows) then goto mine else
     print("Returning to home")
     slave:goToDestructive(startPos)
 end
