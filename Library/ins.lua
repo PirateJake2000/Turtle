@@ -205,8 +205,8 @@ local ins = {
             -- if has fuel
             if not self.canMove() then return end
 
-            -- break when heading is already correct
-            if self.facing == heading then return end
+            -- break when heading is already correct or when the heading command is not horizontal
+            if self.facing == heading or #vector(heading.x,0,heading.z) == 0 then return end
 
             -- calculate heading direction
             local x = self.facing:cross(heading).y
