@@ -27,6 +27,7 @@ local oreDict = {
     "minecraft:lapis_ore",
     "minecraft:diamond_ore",
     "minecraft:emerald_ore",
+    "minecraft:copper_ore"
 }
 
 -- Directions
@@ -45,15 +46,16 @@ function mineVein(startPosition, oreName)
     local knownOres = {startPosition}
 
     local function removeOreFromTable(removeOre)
-        for i,ore in pairs(konwnOres) do
+        for i,ore in pairs(knownOres) do
             if ore == removeOre then
                 table.remove(knownOres, i)
+                return
             end
         end
     end
 
     local function oreIsKnown(checkOre)
-        for i,ore in pairs(konwnOres) do
+        for i,ore in pairs(knownOres) do -- Table expected got nil
             if ore == checkOre then
                 return true
             end
