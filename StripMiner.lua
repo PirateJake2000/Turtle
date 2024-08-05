@@ -103,10 +103,13 @@ while slave.position ~= rowEndPos do
     local blocks = mine()
 
     for key, value in pairs(blocks) do
-        if value.name in oreDict then
-            mineVein(value.position)
-            print("Found Ore: " .. value.name)
-            print("Position: " .. value.position)
+        -- Loop through oreDict and check if the block is in the oreDict
+        for i, ore in ipairs(oreDict) do
+            if value.name == ore then
+                mineVein(value.position)
+                print("Found Ore: " .. value.name)
+                print("Position: " .. value.position)
+            end
         end
     end
 end
