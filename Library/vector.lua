@@ -101,7 +101,7 @@ local vector = {
             end
 
             return solutions[solution]
-        end
+        end,
 
         --- Returns the index of the closest vector in the list
         ---@param vectorList table

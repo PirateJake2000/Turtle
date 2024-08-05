@@ -10,18 +10,32 @@ function download(name)
   end
 
   data = request.readAll()
+
+  local updatedFile = false
  
   if fs.exists(name) then
-    fs.delete(name)
+    -- Compare the file to see if it needs updating if it does update it
+    local file = fs.open(name, "r")
+    local oldData = file.readAll()
+    file.close()
+
+    if oldData ~= data then
+      updatedFile = true
+    end
+
+  end
+  
+  if updatedFile then
+    print("Updating " .. name)
     file = fs.open(name, "w")
     file.write(data)
     file.close()
   else
-    file = fs.open(name, "w")
-    file.write(data)
-    file.close()
+    print("No changes to " .. name)
   end
 
+
+  return updatedFile
 end
 -- Start by downloading the repo file
 download("_Files.txt", repo)
