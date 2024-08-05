@@ -40,13 +40,14 @@ local directions = {
 
 -- Functions
 function mineVein(startPosition, oreName)
+    local ogFacing = slave.facing:clone()
+
     local knownOres = {startPosition}
 
     local function removeOreFromTable(removeOre)
         for i,ore in pairs(konwnOres) do
             if ore == removeOre then
                 table.remove(knownOres, i)
-                return
             end
         end
     end
@@ -77,6 +78,9 @@ function mineVein(startPosition, oreName)
         table.remove(knownOres, id)
         updateKnownOres()
     end
+
+    slave:goToDestructive(startPosition)
+    slave:headingCommand(ogFacing)
 end
 
 function mine()

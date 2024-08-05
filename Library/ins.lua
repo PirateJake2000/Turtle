@@ -237,8 +237,6 @@ local ins = {
             -- move to target
             local steps = self.position:distance(tempTarget)
 
-            print(steps)
-
             for i=1, steps do
                 self:forward()
             end
@@ -262,8 +260,6 @@ local ins = {
 
             -- move to target
             local steps = self.position:distance(tempTarget)
-
-            print(steps)
 
             for i=1, steps do
                 turtle.dig()
