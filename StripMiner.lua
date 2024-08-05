@@ -41,8 +41,6 @@ local directions = {
 
 -- Functions
 function mineVein(startPosition, oreName)
-    local ogFacing = slave.facing:clone()
-
     local knownOres = {startPosition}
 
     local function removeOreFromTable(removeOre)
@@ -94,9 +92,6 @@ function mineVein(startPosition, oreName)
         table.remove(knownOres, id)
         updateKnownOres()
     end
-
-    slave:goToDestructive(startPosition)
-    slave:headingCommand(ogFacing)
 end
 
 function mine()
@@ -172,9 +167,15 @@ while slave.position ~= rowEndPos do
                 --   tags = { ["minecraft:logs"] = true, ... },
                 -- }
 
+                local ogPosition = slave.position:clone()
+                local ogFacing = slave.facing:clone()
+
                 mineVein(value.position, value.name)
                 print("Found Ore: " .. value.name)
                 print("Position: " .. value.position)
+
+                slave:goToDestructive(ogPosition)
+                slave:headingCommand(ogFacing)
             end
         end
     end
