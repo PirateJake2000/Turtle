@@ -16,7 +16,7 @@ ins = require("Library.ins")
 -- 9 -> Mining RowLength
 
 -- Setup
-local slave = ins(vector(-444,90,-331), vector(-1,0,0))
+local slave = ins(vector(-318,70,-160), vector(0,0,1))
 
 -- Ores
 local oreDict = {
@@ -114,10 +114,10 @@ end
 -- Settings
 local startPos = slave.position
 local startFacing = slave.facing
-local mineDepth = args[7] or 25
+local mineDepth = args[7] or 50
 
-local rows = args[8] or 4
-local rowLength = args[9] or 16
+local rows = args[8] or 6
+local rowLength = args[9] or 24
 -----------------------------------------------
 
 

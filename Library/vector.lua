@@ -108,7 +108,7 @@ local vector = {
         ---@param self vector
         ---@return number
         closestVectorIndex = function(self, vectorList)
-            local minDist = math.huge()
+            local minDist = math.huge
             local minId = 0
             for i,v in pairs(vectorList) do
                 local dist = #(self-v)
