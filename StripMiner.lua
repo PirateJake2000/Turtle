@@ -16,7 +16,7 @@ ins = require("Library.ins")
 -- 9 -> Mining RowLength
 
 -- Setup
-local slave = ins(vector(-318,70,-160), vector(0,0,1))
+local slave = ins(vector(-1527,91,-1099), vector(1,0,0))
 
 -- Ores
 local oreDict = {
