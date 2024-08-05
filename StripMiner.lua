@@ -27,7 +27,27 @@ local oreDict = {
     "minecraft:lapis_ore",
     "minecraft:diamond_ore",
     "minecraft:emerald_ore",
-    "minecraft:copper_ore"
+    "minecraft:copper_ore",
+
+    "minecraft:deepslate_coal_ore",
+    "minecraft:deepslate_iron_ore",
+    "minecraft:deepslate_gold_ore",
+    "minecraft:deepslate_redstone_ore",
+    "minecraft:deepslate_lapis_ore",
+    "minecraft:deepslate_diamond_ore",
+    "minecraft:deepslate_emerald_ore",
+    "minecraft:deepslate_copper_ore"
+}
+
+local keepDict = {
+    "minecraft:coal",
+    "minecraft:raw_iron",
+    "minecraft:raw_gold",
+    "minecraft:redstone",
+    "minecraft:lapis_lazuli",
+    "minecraft:diamond",
+    "minecraft:emerald",
+    "minecraft:raw_copper"
 }
 
 -- Directions
@@ -126,6 +146,44 @@ function mine()
 
     return blockTable
 end
+
+function forceForward()
+    local success = slave:forward()
+    turtle.dig()
+    if not success then forceForward() end
+end
+
+function dumpInventory()
+    -- Dump all none ore items
+    for i = 1, 16 do
+        turtle.select(i)
+        local item = turtle.getItemDetail()
+        if item then
+            local keep = false
+            for i, keepItem in ipairs(keepDict) do
+                if item.name == keepItem then
+                    keep = true
+                    break
+                end
+            end
+
+            if not keep then
+                turtle.drop()
+            end
+        end
+    end
+
+    -- Eat any coal
+    for i = 1, 16 do
+        turtle.select(i)
+        local item = turtle.getItemDetail()
+        if item then
+            if item.name == "minecraft:coal" then
+                turtle.refuel()
+            end
+        end
+    end
+end
 -----------------------------------------------
 -- Settings
 local startPos = slave.position
@@ -171,6 +229,21 @@ while slave.position ~= rowEndPos do
                 local ogFacing = slave.facing:clone()
 
                 mineVein(value.position, value.name)
+
+                dumpInventory()
+
+                -- Work out how many blocks needed to travel to get back to startPos
+                local blocksAwayFromHomeX = math.abs(startPos.x - slave.position.x)
+                local blocksAwayFromHomeZ = math.abs(startPos.z - slave.position.z)
+                local blocksAwayFromHomeY = math.abs(startPos.y - slave.position.y)
+
+                local blocksAway = blocksAwayFromHomeX + blocksAwayFromHomeZ + blocksAwayFromHomeY
+
+                if (blocksAway > turtle.getFuelLevel()) then
+                    -- Low fuel go home time
+                    goto quitMining
+                end
+
                 print("Found Ore: " .. value.name)
                 print("Position: " .. value.position)
 
@@ -189,25 +262,27 @@ if (currentRow <= rows) then
     if slave.facing == startFacing then
         slave:turnRight()
         turtle.dig()
-        slave:forward()
+        forceForward()
         turtle.dig()
-        slave:forward()
+        forceForward()
         turtle.dig()
-        slave:forward()
+        forceForward()
         slave:turnRight()
     else
         slave:turnLeft()
         turtle.dig()
-        slave:forward()
+        forceForward()
         turtle.dig()
-        slave:forward()
+        forceForward()
         turtle.dig()
-        slave:forward()
+        forceForward()
         slave:turnLeft()
     end
 
     goto mine 
 else
+    ::quitMining::
+
     print("Returning to home")
     slave:goToDestructive(startPos)
     slave:headingCommand(startFacing)
