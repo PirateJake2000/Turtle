@@ -104,30 +104,32 @@ function mine()
     slave:forward()
 
     local _,blockUp = turtle.inspectUp()
-    blockUp.position = slave.position + vector(0,1,0)
+    if (_) then blockUp.position = slave.position + vector(0,1,0) end
+
 
     local _,blockDown = turtle.inspectDown()
-    blockDown.position = slave.position + vector(0,-1,0)
+    if (_) then blockDown.position = slave.position + vector(0,-1,0) end
     
     slave:turnLeft()
     local _,blockLeft = turtle.inspect()
-    blockLeft.position = slave.position + slave.facing
+    if (_) then blockLeft.position = slave.position + slave.facing end
 
     slave:turnRight()
 
     slave:turnRight()
     local _,blockRight = turtle.inspect()
-    blockRight.position = slave.position + slave.facing
+    if (_) then blockRight.position = slave.position + slave.facing end
 
     slave:turnLeft()
 
+    local blockTable = {}
 
-    return {
-        up = blockUp,
-        down = blockDown,
-        left = blockLeft,
-        right = blockRight
-    }
+    if blockUp then table.insert(blockTable, blockUp) end
+    if blockDown then table.insert(blockTable, blockDown) end
+    if blockLeft then table.insert(blockTable, blockLeft) end
+    if blockRight then table.insert(blockTable, blockRight) end
+
+    return blockTable
 end
 -----------------------------------------------
 -- Settings
