@@ -102,6 +102,24 @@ local vector = {
 
             return solutions[solution]
         end
+
+        --- Returns the index of the closest vector in the list
+        ---@param vectorList table
+        ---@param self vector
+        ---@return number
+        closestVectorIndex = function(self, vectorList)
+            local minDist = math.huge()
+            local minId = 0
+            for i,v in pairs(vectorList) do
+                local dist = #(self-v)
+                if dist < minDist then
+                    minDist = dist
+                    minId = i
+                end
+            end
+
+            return minId
+        end
     }
 }
 

@@ -16,7 +16,7 @@ ins = require("Library.ins")
 -- 9 -> Mining RowLength
 
 -- Setup
-local slave = ins(vector(args[1],args[2],args[3]), vector(args[4],args[5],args[6]))
+local slave = ins(vector(-444,90,-331), vector(-1,0,0))
 
 -- Ores
 local oreDict = {
@@ -42,11 +42,6 @@ local directions = {
 function mineVein(startPosition, oreName)
     local knownOres = {startPosition}
 
-    slave:goToDestructive(startPosition)
-    
-    -- remove startPosition from knownOres
-    removeOreFromTable(startPosition)
-
     local function removeOreFromTable(removeOre)
         for i,ore in pairs(konwnOres) do
             if ore == removeOre then
@@ -59,11 +54,28 @@ function mineVein(startPosition, oreName)
     local function updateKnownOres()
         for i,dir in pairs(directions) do
             slave:headingCommand(dir)
-            _,data = turtle.inspect()
+            local _,data = turtle.inspect()
             if data.name == oreName then
-                table.insert(knownOres, slave.position + slave.f)
+                table.insert(knownOres, slave.position + slave.facing)
             end
         end
+
+        local _,data = turtle.inspectUp()
+        if data.name == oreName then
+            table.insert(knownOres, slave.position + vector(0,1,0))
+        end
+
+        local _,data = turtle.inspectDown()
+        if data.name == oreName then
+            table.insert(knownOres, slave.position + vector(0,-1,0))
+        end
+    end
+
+    while #knownOres > 0 do
+        local id = slave.position:closestVectorIndex(knownOres)
+        slave:goToDestructive(knownOres[id])
+        table.remove(knownOres, id)
+        updateKnownOres()
     end
 end
 

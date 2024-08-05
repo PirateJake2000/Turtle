@@ -27,3 +27,5 @@ function spawnAndSetupTurtle()
     -- Run update script on the placed turtle
     peripheral.call("front", "run", "update")
 end
+
+a=peripheral.getMethods("front") for i,v in pairs(a) do print(v) end
