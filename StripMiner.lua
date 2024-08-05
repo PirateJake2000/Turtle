@@ -149,8 +149,10 @@ end
 
 function forceForward()
     local success = slave:forward()
-    turtle.dig()
-    if not success then forceForward() end
+    if not success then 
+        turtle.dig()
+        forceForward()
+    end
 end
 
 function dumpInventory()
@@ -190,8 +192,8 @@ local startPos = slave.position
 local startFacing = slave.facing
 local mineDepth = args[7] or 10
 
-local rows = args[8] or 64
-local rowLength = args[9] or 64
+local rows = args[8] or 8
+local rowLength = args[9] or 32
 -----------------------------------------------
 
 
@@ -228,9 +230,8 @@ while slave.position ~= rowEndPos do
                 local ogPosition = slave.position:clone()
                 local ogFacing = slave.facing:clone()
 
-                mineVein(value.position, value.name)
-
                 dumpInventory()
+                mineVein(value.position, value.name)
 
                 -- Work out how many blocks needed to travel to get back to startPos
                 local blocksAwayFromHomeX = math.abs(startPos.x - slave.position.x)
