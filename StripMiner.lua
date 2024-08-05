@@ -241,7 +241,7 @@ while slave.position ~= rowEndPos do
 
                 if (blocksAway > turtle.getFuelLevel()) then
                     -- Low fuel go home time
-                    goto quitMining
+                    currentRow = rows
                 end
 
                 print("Found Ore: " .. value.name)
@@ -281,8 +281,6 @@ if (currentRow <= rows) then
 
     goto mine 
 else
-    ::quitMining::
-
     print("Returning to home")
     slave:goToDestructive(startPos)
     slave:headingCommand(startFacing)
