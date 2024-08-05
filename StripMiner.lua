@@ -51,24 +51,38 @@ function mineVein(startPosition, oreName)
             end
         end
     end
+
+    local function oreIsKnown(checkOre)
+        for i,ore in pairs(konwnOres) do
+            if ore == checkOre then
+                return true
+            end
+        end
+    end
     
     local function updateKnownOres()
         for i,dir in pairs(directions) do
-            slave:headingCommand(dir)
-            local _,data = turtle.inspect()
-            if data.name == oreName then
-                table.insert(knownOres, slave.position + slave.facing)
+            if not oreIsKnown(slave.position + dir) then
+                slave:headingCommand(dir)
+                local _,data = turtle.inspect()
+                if data.name == oreName then
+                    table.insert(knownOres, slave.position + slave.facing)
+                end
             end
         end
 
-        local _,data = turtle.inspectUp()
-        if data.name == oreName then
-            table.insert(knownOres, slave.position + vector(0,1,0))
+        if not oreIsKnown(slave.position + vector(0,1,0)) then
+            local _,data = turtle.inspectUp()
+            if data.name == oreName then
+                table.insert(knownOres, slave.position + vector(0,1,0))
+            end
         end
 
-        local _,data = turtle.inspectDown()
-        if data.name == oreName then
-            table.insert(knownOres, slave.position + vector(0,-1,0))
+        if not oreIsKnown(slave.position + vector(0,-1,0)) then
+            local _,data = turtle.inspectDown()
+            if data.name == oreName then
+                table.insert(knownOres, slave.position + vector(0,-1,0))
+            end
         end
     end
 
@@ -113,7 +127,6 @@ function mine()
         right = blockRight
     }
 end
-
 -----------------------------------------------
 -- Settings
 local startPos = slave.position
