@@ -100,7 +100,9 @@ function setUp()
 
     checkForChest()
     -- Check to see if a chest was placed
-    if turtle.inspectUp().name ~= "minecraft:chest" then
+    
+    local _,above = turtle.inspectUp()
+    if above.name ~= "minecraft:chest" then
         os.sleep(3)
         checkForChest()
     end
