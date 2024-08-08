@@ -21,6 +21,10 @@ local id, message = rednet.receive()
 
 print("Revieved data")
 
+for k,v in pairs(message) do
+    print(k,v)
+end
+
 
 
 -- Setup
