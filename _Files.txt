@@ -3,6 +3,6 @@
     "Library/ins.lua",
     "Main.lua",
     "Miner.lua",
-    "StripMiner.lua",
+    "rom/autorun/StripMiner.lua",
     "StripMineMaster.lua",
 }
