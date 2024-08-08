@@ -14,6 +14,7 @@ local mineDepth = args[2] -- Lowest Turtle
 local rows = 16
 local rowLength = 16 * 3
 local extraFuel = 64
+
 local turtlesSent = 0
 
 -- Setup
@@ -46,8 +47,8 @@ function sendTurtle()
     local coal = ((rows * (rowLength + 3) + altDifference * 2 ) + extraFuel) / 80
     
     -- tell turtle how deep to go by amount of red wool
-    selectItem("minecraft:red_wool") -- not sure about name
-    turtle.dropDown(math.floor((mineDepth - turtlesSent*5)/5))
+    turtle.dropDown()
+
 
 
 end
