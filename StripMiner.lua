@@ -15,8 +15,18 @@ ins = require("Library.ins")
 -- 8 -> Mining Rows
 -- 9 -> Mining RowLength
 
+rednet.open("right")
+
+local id, message = rednet.receive()
+
+print("Revieved data")
+
+
+
 -- Setup
 local slave = ins(vector(-957,66,911), vector(0,0,-1))
+
+
 
 -- Ores
 local oreDict = {

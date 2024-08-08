@@ -18,7 +18,36 @@ local extraFuel = 64
 local turtlesSent = 0
 
 -- Setup
-local slave = ins(vector(-2928,67,3119), vector(-1,0,0))
+print("Setup")
+print("enter turtle x")
+local x = tonumber(read())
+print("enter turtle y")
+local y = tonumber(read())
+print("enter turtle z")
+local z = tonumber(read())
+print("enter turtle facing x")
+local fx = tonumber(read())
+print("enter turtle facing y")
+local fy = tonumber(read())
+print("enter turtle facing z")
+local fz = tonumber(read())
+
+term.clear()
+term.setCursorPos(1,1)
+
+print("setup")
+print("Enter how many rows you want to mine")
+rows = tonumber(read())
+print("Enter how long you want the rows to be")
+rowLength = tonumber(read())
+print("How deep do you want the mine to be?")
+mineDepth = tonumber(read())
+
+
+local slave = ins(vector(x,y,z), vector(fx,fy,fz))
+
+-- Rednet setup
+rednet.open("right")
 
 
 -- select item in inventory
@@ -34,8 +63,8 @@ end
 
 
 
--- place turtle below and send it to its altitude
-function sendTurtle()
+-- place turtle below and give it sufficient coal
+function placeMiner()
     if not selectItem("computercraft:turtle_normal") then return end
 
     turtle.placeDown()
@@ -44,12 +73,12 @@ function sendTurtle()
     
     -- amount of coal needed
     local altDifference = math.abs(slave:position.y - (mineDepth - turtlesSent*5))
-    local coal = ((rows * (rowLength + 3) + altDifference * 2 ) + extraFuel) / 80
+    local coal = math.floor(((rows * (rowLength + 3) + altDifference * 2 ) + extraFuel) / 80)
     
-    -- tell turtle how deep to go by amount of red wool
-    turtle.dropDown()
+    -- give miner coal
+    turtle.dropDown(coal)
 
-
+    
 
 end
 
@@ -77,7 +106,20 @@ function setUp()
     end
 
     turtle.digDown()
-    
+
+    -- Place turtle
+    placeMiner()
+
+    -- Rednet broadcast information
+    rednet.broadcast(
+        {
+            ["location"] = slave.position + vector(0,-1,0),
+            ["facing"] = slave.facing,
+            ["mineDepth"] = mineDepth,
+            ["rows"] = rows,
+            ["rowLength"] = rowLength
+        }
+    )
     
 end
 
