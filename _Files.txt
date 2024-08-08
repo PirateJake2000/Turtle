@@ -4,5 +4,5 @@
     "Main.lua",
     "Miner.lua",
     "StripMiner.lua",
-    "StripMineMaster.lua"
+    "StripMineMaster.lua",
 }
