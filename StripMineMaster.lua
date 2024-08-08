@@ -72,7 +72,7 @@ function placeMiner()
     selectItem("minecraft:coal")
     
     -- amount of coal needed
-    local altDifference = math.abs(slave:position.y - (mineDepth - turtlesSent*5))
+    local altDifference = math.abs(slave.position.y - (mineDepth - turtlesSent*5))
     local coal = math.floor(((rows * (rowLength + 3) + altDifference * 2 ) + extraFuel) / 80)
     
     -- give miner coal
