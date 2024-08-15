@@ -36,7 +36,7 @@ local oreDict = {
     "minecraft:deepslate_lapis_ore",
     "minecraft:deepslate_diamond_ore",
     "minecraft:deepslate_emerald_ore",
-    "minecraft:deepslate_copper_ore"
+    "minecraft:deepslate_copper_ore",
 
     "mekanism:osmium_ore",
     "mekanism:deepslate_osmium_ore",
@@ -56,11 +56,11 @@ local keepDict = {
     "minecraft:lapis_lazuli",
     "minecraft:diamond",
     "minecraft:emerald",
-    "minecraft:raw_copper"
+    "minecraft:raw_copper",
 
     "mekanism:raw_osmium",
     "mekanism:raw_copper",
-    "mekanism:raw_tin"
+    "mekanism:raw_tin",
 }
 
 -- Directions
