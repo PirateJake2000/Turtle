@@ -1,8 +1,5 @@
 {
     "Library/vector.lua",
     "Library/ins.lua",
-    "Main.lua",
-    "Miner.lua",
-    "rom/autorun/StripMiner.lua",
-    "StripMineMaster.lua",
+    "Mine.lua",
 }
