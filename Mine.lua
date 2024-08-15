@@ -15,22 +15,8 @@ ins = require("Library.ins")
 -- 8 -> Mining Rows
 -- 9 -> Mining RowLength
 
-rednet.open("right")
-
-local id, message = rednet.receive()
-
-print("Revieved data")
-
-for k,v in pairs(message) do
-    print(k,v)
-end
-
-
-
 -- Setup
-local slave = ins(vector(-957,66,911), vector(0,0,-1))
-
-
+local slave = ins(vector(2682,66,1255), vector(1,0,0))
 
 -- Ores
 local oreDict = {
@@ -51,6 +37,15 @@ local oreDict = {
     "minecraft:deepslate_diamond_ore",
     "minecraft:deepslate_emerald_ore",
     "minecraft:deepslate_copper_ore"
+
+    "mekanism:osmium_ore",
+    "mekanism:deepslate_osmium_ore",
+
+    "mekanism:copper_ore",
+    "mekanism:deepslate_copper_ore",
+
+    "mekanism:tin_ore",
+    "mekanism:deepslate_tin_ore",
 }
 
 local keepDict = {
@@ -62,6 +57,10 @@ local keepDict = {
     "minecraft:diamond",
     "minecraft:emerald",
     "minecraft:raw_copper"
+
+    "mekanism:raw_osmium",
+    "mekanism:raw_copper",
+    "mekanism:raw_tin"
 }
 
 -- Directions
@@ -189,16 +188,7 @@ function dumpInventory()
         end
     end
 
-    -- Eat any coal
-    for i = 1, 16 do
-        turtle.select(i)
-        local item = turtle.getItemDetail()
-        if item then
-            if item.name == "minecraft:coal" then
-                turtle.refuel()
-            end
-        end
-    end
+
 end
 -----------------------------------------------
 -- Settings
