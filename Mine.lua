@@ -16,8 +16,9 @@ ins = require("Library.ins")
 -- 9 -> Mining RowLength
 
 -- Setup
-local slave = ins(vector(2682,66,1255), vector(1,0,0))
+local slave = ins(vector(579,119,-1215), vector(0,0,-1))
 
+print("Running")
 -- Ores
 local oreDict = {
     "minecraft:coal_ore",
